@@ -11,5 +11,15 @@
 
     <artifactId>bookstore-run</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.gmail.acharne1985.bookstore</groupId>
+            <artifactId>bookstore-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <packaging>jar</packaging>
+
 
 </project>

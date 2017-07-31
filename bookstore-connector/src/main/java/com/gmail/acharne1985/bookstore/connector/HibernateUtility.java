@@ -1,4 +1,4 @@
-package com.gmail.acharne1985.boofstore.connector;
+package com.gmail.acharne1985.bookstore.connector;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
@@ -26,6 +26,7 @@ public class HibernateUtility {
             }
         } catch (HibernateException e) {
             log.error("Initial SessionFactory creating failed" + e.getMessage());
+            e.getMessage();
         }
 
         return factory;

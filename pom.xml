@@ -10,6 +10,7 @@
     <modules>
         <module>bookstore-connector</module>
         <module>bookstore-run</module>
+        <module>bookstore-model</module>
     </modules>
 
     <properties>
