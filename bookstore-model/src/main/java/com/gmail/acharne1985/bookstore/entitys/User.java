@@ -1,6 +1,7 @@
 package com.gmail.acharne1985.bookstore.entitys;
 
 import javax.persistence.*;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
@@ -25,6 +26,14 @@ public class User extends BaseEntity {
 
     @Column(name = "address")
     private String address;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "roles_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Order> orders;
+
 
     @Override
     public Integer getId() {
@@ -76,6 +85,22 @@ public class User extends BaseEntity {
         this.address = address;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,7 +113,11 @@ public class User extends BaseEntity {
         if (lastnameUser != null ? !lastnameUser.equals(user.lastnameUser) : user.lastnameUser != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        return address != null ? address.equals(user.address) : user.address == null;
+        if (address != null ? !address.equals(user.address) : user.address != null) return false;
+        if (role != null ? !role.equals(user.role) : user.role != null) return false;
+        if (orders != null ? !orders.equals(user.orders) : user.orders != null) return false;
+
+        return true;
     }
 
     @Override
@@ -99,6 +128,8 @@ public class User extends BaseEntity {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (orders != null ? orders.hashCode() : 0);
         return result;
     }
 
@@ -118,6 +149,10 @@ public class User extends BaseEntity {
         sb.append(password);
         sb.append(", address = ");
         sb.append(address);
+        sb.append(", role = ");
+        sb.append(role);
+        sb.append(", orders = ");
+        sb.append(orders);
         sb.append("]");
 
         return sb.toString();

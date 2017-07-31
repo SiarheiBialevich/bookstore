@@ -1,6 +1,7 @@
 package com.gmail.acharne1985.bookstore.entitys;
 
 import javax.persistence.*;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
@@ -13,6 +14,10 @@ public class City extends BaseEntity {
 
     @Column(name = "name")
     private String nameCity;
+
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private List<Location> locations;
+
 
     @Override
     public Integer getId() {
@@ -32,6 +37,14 @@ public class City extends BaseEntity {
         this.nameCity = nameCity;
     }
 
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locationList) {
+        this.locations = locationList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,13 +53,17 @@ public class City extends BaseEntity {
         City city = (City) o;
 
         if (id != null ? !id.equals(city.id) : city.id != null) return false;
-        return nameCity != null ? nameCity.equals(city.nameCity) : city.nameCity == null;
+        if (nameCity != null ? !nameCity.equals(city.nameCity) : city.nameCity != null) return false;
+        if (locations != null ? !locations.equals(city.locations) : city.locations != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (nameCity != null ? nameCity.hashCode() : 0);
+        result = 31 * result + (locations != null ? locations.hashCode() : 0);
         return result;
     }
 
@@ -58,6 +75,8 @@ public class City extends BaseEntity {
         sb.append(id);
         sb.append(", nameCity = ");
         sb.append(nameCity);
+        sb.append(", locations = ");
+        sb.append(locations);
         sb.append("]");
 
         return sb.toString();

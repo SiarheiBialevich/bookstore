@@ -14,6 +14,15 @@ public class BookLocation extends BaseEntity {
     @Column(name = "persence")
     private Boolean persence;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "books_id")
+    private Book book;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "locations_id")
+    private Location location;
+
+
     @Override
     public Integer getId() {
         return id;
@@ -32,6 +41,22 @@ public class BookLocation extends BaseEntity {
         this.persence = persence;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,13 +65,19 @@ public class BookLocation extends BaseEntity {
         BookLocation that = (BookLocation) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return persence != null ? persence.equals(that.persence) : that.persence == null;
+        if (persence != null ? !persence.equals(that.persence) : that.persence != null) return false;
+        if (book != null ? !book.equals(that.book) : that.book != null) return false;
+        if (location != null ? !location.equals(that.location) : that.location != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (persence != null ? persence.hashCode() : 0);
+        result = 31 * result + (book != null ? book.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;
     }
 
@@ -58,6 +89,11 @@ public class BookLocation extends BaseEntity {
         sb.append(id);
         sb.append(", persence = ");
         sb.append(persence);
+        sb.append(", book = ");
+        sb.append(book);
+        sb.append(", location = ");
+        sb.append(location);
+        sb.append("]");
 
         return sb.toString();
     }

@@ -1,6 +1,7 @@
 package com.gmail.acharne1985.bookstore.entitys;
 
 import javax.persistence.*;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
@@ -19,6 +20,10 @@ public class Role extends BaseEntity {
 
     @Column(name = "title")
     private String title;
+
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    private List<User> users;
+
 
     @Override
     public Integer getId() {
@@ -54,6 +59,14 @@ public class Role extends BaseEntity {
         this.title = title;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,7 +77,10 @@ public class Role extends BaseEntity {
         if (id != null ? !id.equals(role.id) : role.id != null) return false;
         if (nameRole != null ? !nameRole.equals(role.nameRole) : role.nameRole != null) return false;
         if (lastnameRole != null ? !lastnameRole.equals(role.lastnameRole) : role.lastnameRole != null) return false;
-        return title != null ? title.equals(role.title) : role.title == null;
+        if (title != null ? !title.equals(role.title) : role.title != null) return false;
+        if (users != null ? !users.equals(role.users) : role.users != null) return false;
+
+        return true;
     }
 
     @Override
@@ -73,6 +89,7 @@ public class Role extends BaseEntity {
         result = 31 * result + (nameRole != null ? nameRole.hashCode() : 0);
         result = 31 * result + (lastnameRole != null ? lastnameRole.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
         return result;
     }
 
@@ -88,6 +105,8 @@ public class Role extends BaseEntity {
         sb.append(lastnameRole);
         sb.append(", title = ");
         sb.append(title);
+        sb.append(", users = ");
+        sb.append(users);
         sb.append("]");
 
         return sb.toString();

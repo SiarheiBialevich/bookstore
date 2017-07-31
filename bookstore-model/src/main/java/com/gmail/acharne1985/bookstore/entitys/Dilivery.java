@@ -14,6 +14,11 @@ public class Dilivery extends BaseEntity {
     @Column(name = "shipping_method")
     private String shippingMethod;
 
+    @ManyToOne
+    @JoinColumn(name = "books_id")
+    private Book book;
+
+
     @Override
     public Integer getId() {
         return id;
@@ -32,6 +37,14 @@ public class Dilivery extends BaseEntity {
         this.shippingMethod = shippingMethod;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,13 +53,18 @@ public class Dilivery extends BaseEntity {
         Dilivery dilivery = (Dilivery) o;
 
         if (id != null ? !id.equals(dilivery.id) : dilivery.id != null) return false;
-        return shippingMethod != null ? shippingMethod.equals(dilivery.shippingMethod) : dilivery.shippingMethod == null;
+        if (shippingMethod != null ? !shippingMethod.equals(dilivery.shippingMethod) : dilivery.shippingMethod != null)
+            return false;
+        if (book != null ? !book.equals(dilivery.book) : dilivery.book != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (shippingMethod != null ? shippingMethod.hashCode() : 0);
+        result = 31 * result + (book != null ? book.hashCode() : 0);
         return result;
     }
 
@@ -58,7 +76,8 @@ public class Dilivery extends BaseEntity {
         sb.append(id);
         sb.append(", shippingMethod = ");
         sb.append(shippingMethod);
-        sb.append(", phone = ");
+        sb.append(", book = ");
+        sb.append(book);
         sb.append("]");
 
         return sb.toString();

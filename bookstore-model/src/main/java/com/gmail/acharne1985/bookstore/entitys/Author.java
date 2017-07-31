@@ -1,6 +1,7 @@
 package com.gmail.acharne1985.bookstore.entitys;
 
 import javax.persistence.*;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
@@ -22,6 +23,10 @@ public class Author extends BaseEntity {
 
     @Column(name = "biography")
     private String biography;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
+
 
     @Override
     public Integer getId() {
@@ -65,6 +70,14 @@ public class Author extends BaseEntity {
         this.biography = biography;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,7 +90,10 @@ public class Author extends BaseEntity {
         if (lastnameAuthor != null ? !lastnameAuthor.equals(author.lastnameAuthor) : author.lastnameAuthor != null)
             return false;
         if (birthday != null ? !birthday.equals(author.birthday) : author.birthday != null) return false;
-        return biography != null ? biography.equals(author.biography) : author.biography == null;
+        if (biography != null ? !biography.equals(author.biography) : author.biography != null) return false;
+        if (books != null ? !books.equals(author.books) : author.books != null) return false;
+
+        return true;
     }
 
     @Override
@@ -87,6 +103,7 @@ public class Author extends BaseEntity {
         result = 31 * result + (lastnameAuthor != null ? lastnameAuthor.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (biography != null ? biography.hashCode() : 0);
+        result = 31 * result + (books != null ? books.hashCode() : 0);
         return result;
     }
 
@@ -104,6 +121,8 @@ public class Author extends BaseEntity {
         sb.append(birthday);
         sb.append(", biography");
         sb.append(biography);
+        sb.append(", books = ");
+        sb.append(books);
         sb.append("]");
 
         return sb.toString();

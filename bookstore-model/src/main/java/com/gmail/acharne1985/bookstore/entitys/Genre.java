@@ -1,6 +1,7 @@
 package com.gmail.acharne1985.bookstore.entitys;
 
 import javax.persistence.*;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 @Entity
@@ -13,6 +14,10 @@ public class Genre extends BaseEntity {
 
     @Column(name = "name")
     private String nameGenre;
+
+    @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
+    private List<Book> books;
+
 
     @Override
     public Integer getId() {
@@ -32,6 +37,14 @@ public class Genre extends BaseEntity {
         this.nameGenre = nameGenre;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,13 +53,17 @@ public class Genre extends BaseEntity {
         Genre genre = (Genre) o;
 
         if (id != null ? !id.equals(genre.id) : genre.id != null) return false;
-        return nameGenre != null ? nameGenre.equals(genre.nameGenre) : genre.nameGenre == null;
+        if (nameGenre != null ? !nameGenre.equals(genre.nameGenre) : genre.nameGenre != null) return false;
+        if (books != null ? !books.equals(genre.books) : genre.books != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (nameGenre != null ? nameGenre.hashCode() : 0);
+        result = 31 * result + (books != null ? books.hashCode() : 0);
         return result;
     }
 
@@ -58,6 +75,8 @@ public class Genre extends BaseEntity {
         sb.append(id);
         sb.append(", name = ");
         sb.append(nameGenre);
+        sb.append(", books = ");
+        sb.append(books);
         sb.append("]");
 
         return sb.toString();
