@@ -23,6 +23,10 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "users_id")
     private User user;
 
+    public Order() {
+
+    }
+
     @Override
     public Integer getId() {
         return id;

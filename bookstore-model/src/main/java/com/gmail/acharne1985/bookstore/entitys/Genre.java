@@ -18,6 +18,9 @@ public class Genre extends BaseEntity {
     @OneToMany(mappedBy = "genre", fetch = FetchType.LAZY)
     private List<Book> books;
 
+    public Genre() {
+
+    }
 
     @Override
     public Integer getId() {

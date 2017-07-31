@@ -27,6 +27,9 @@ public class Author extends BaseEntity {
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 
+    public Author() {
+
+    }
 
     @Override
     public Integer getId() {

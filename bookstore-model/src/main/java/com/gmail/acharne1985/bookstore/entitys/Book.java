@@ -37,6 +37,9 @@ public class Book extends BaseEntity {
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Dilivery> diliveries;
 
+    public Book() {
+
+    }
 
     @Override
     public Integer getId() {

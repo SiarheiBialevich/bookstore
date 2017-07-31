@@ -22,6 +22,9 @@ public class BookLocation extends BaseEntity {
     @JoinColumn(name = "locations_id")
     private Location location;
 
+    public BookLocation() {
+
+    }
 
     @Override
     public Integer getId() {

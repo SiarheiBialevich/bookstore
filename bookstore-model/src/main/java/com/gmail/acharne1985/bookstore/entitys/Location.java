@@ -25,6 +25,9 @@ public class Location extends BaseEntity {
     @OneToMany(mappedBy = "location")
     private List<BookLocation> bookLocations;
 
+    public Location() {
+
+    }
 
     @Override
     public Integer getId() {

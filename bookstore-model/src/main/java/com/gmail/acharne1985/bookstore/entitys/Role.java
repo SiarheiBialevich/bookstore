@@ -24,6 +24,9 @@ public class Role extends BaseEntity {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<User> users;
 
+    public Role() {
+
+    }
 
     @Override
     public Integer getId() {

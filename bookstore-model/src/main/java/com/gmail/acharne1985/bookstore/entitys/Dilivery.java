@@ -18,6 +18,9 @@ public class Dilivery extends BaseEntity {
     @JoinColumn(name = "books_id")
     private Book book;
 
+    public Dilivery() {
+
+    }
 
     @Override
     public Integer getId() {

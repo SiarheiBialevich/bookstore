@@ -18,6 +18,9 @@ public class City extends BaseEntity {
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
     private List<Location> locations;
 
+    public City() {
+
+    }
 
     @Override
     public Integer getId() {
