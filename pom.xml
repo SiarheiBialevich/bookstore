@@ -11,6 +11,7 @@
         <module>bookstore-connector</module>
         <module>bookstore-run</module>
         <module>bookstore-model</module>
+        <module>bookstore-api</module>
     </modules>
 
     <properties>
