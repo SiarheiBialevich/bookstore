@@ -13,6 +13,7 @@
         <module>bookstore-model</module>
         <module>bookstore-api</module>
         <module>bookstore-dao</module>
+        <module>bookstore-service</module>
     </modules>
 
     <properties>
