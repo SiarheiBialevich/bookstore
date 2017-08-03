@@ -14,17 +14,17 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Author"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.BaseEntity"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Book"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.BookLocation"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.City"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Dilivery"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Genre"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Location"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Order"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.Role"/>
-        <mapping class="com.gmail.acharne1985.bookstore.entitys.User"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Author"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.BaseEntity"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Book"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.BookLocation"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.City"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Dilivery"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Genre"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Location"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Order"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.Role"/>
+        <mapping class="com.gmail.acharne.bookstore.entitys.User"/>
 
     </session-factory>
 </hibernate-configuration>
