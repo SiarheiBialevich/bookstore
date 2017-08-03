@@ -12,6 +12,7 @@
         <module>bookstore-run</module>
         <module>bookstore-model</module>
         <module>bookstore-api</module>
+        <module>bookstore-dao</module>
     </modules>
 
     <properties>
