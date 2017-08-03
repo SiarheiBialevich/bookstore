@@ -11,5 +11,27 @@
 
     <artifactId>bookstore-service</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.gmail.acharne1985.bookstore</groupId>
+            <artifactId>bookstore-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gmail.acharne1985.bookstore</groupId>
+            <artifactId>bookstore-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gmail.acharne1985.bookstore</groupId>
+            <artifactId>bookstore-connector</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
+
 
 </project>
