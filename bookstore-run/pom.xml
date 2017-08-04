@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.gmail.acharne.bookstore</groupId>
-            <artifactId>bookstore-connector</artifactId>
+            <artifactId>bookstore-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -1,7 +1,8 @@
 package com.gmail.acharne.bookstore.service.impl;
 
-import com.gmail.acharne.bookstore.connector.HibernateUtil;
+
 import com.gmail.acharne.bookstore.dao.AbstractDao;
+import com.gmail.acharne.bookstore.dao.impl.util.HibernateUtil;
 import com.gmail.acharne.bookstore.dao.service.AbstractService;
 import com.gmail.acharne.bookstore.entitys.BaseEntity;
 import org.apache.log4j.Logger;
@@ -15,8 +16,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
     private static final Logger log = Logger.getLogger(AbstractServiceImpl.class.getName());
 
-    private SessionFactory factory = HibernateUtil.getSession();
-
     private AbstractDao<T> dao;
 
     @Override
@@ -26,7 +25,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
         try {
 
-            session = factory.openSession();
+            session = HibernateUtil.getInstance().getSession();
             log.info("session: " + session);
             transaction = session.beginTransaction();
 
@@ -47,11 +46,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
             if (session != null) {
                 session.close();
             }
-
-            if (factory != null) {
-                factory.close();
-            }
-
         }
     }
 
@@ -65,7 +59,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
         try {
 
-            session = factory.openSession();
+            session = HibernateUtil.getInstance().getSession();
             transaction = session.beginTransaction();
 
             entityModel = dao.getById(id, session);
@@ -82,10 +76,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
             if (session != null) {
                 session.close();
             }
-
-            if (factory != null) {
-                factory.close();
-            }
         }
 
         return entityModel;
@@ -101,7 +91,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
         try {
 
-            session = factory.openSession();
+            session = HibernateUtil.getInstance().getSession();
             log.info("session: " + session);
             transaction = session.beginTransaction();
 
@@ -120,10 +110,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
             if (session !=null) {
                 session.close();
             }
-
-            if (factory != null) {
-                factory.close();
-            }
         }
 
         return listEntitys;
@@ -137,7 +123,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
         try {
 
-            session = factory.openSession();
+            session = HibernateUtil.getInstance().getSession();
             log.info("session: " + session);
             transaction = session.beginTransaction();
 
@@ -158,10 +144,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
             if (session != null) {
                 session.close();
             }
-
-            if (factory != null) {
-                factory.close();
-            }
         }
     }
 
@@ -173,7 +155,7 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
         try  {
 
-            session = factory.openSession();
+            session = HibernateUtil.getInstance().getSession();
             log.info("session: "+ session);
             transaction = session.beginTransaction();
 
@@ -192,10 +174,6 @@ public abstract class AbstractServiceImpl<T extends BaseEntity> implements Abstr
 
             if (session != null) {
                 session.close();
-            }
-
-            if (factory != null) {
-                factory.close();
             }
         }
     }
