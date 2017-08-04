@@ -3,11 +3,10 @@ package com.gmail.acharne.bookstore.service.impl;
 
 import com.gmail.acharne.bookstore.dao.AbstractDao;
 import com.gmail.acharne.bookstore.dao.impl.util.HibernateUtil;
-import com.gmail.acharne.bookstore.dao.service.AbstractService;
+import com.gmail.acharne.bookstore.service.AbstractService;
 import com.gmail.acharne.bookstore.entitys.BaseEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
