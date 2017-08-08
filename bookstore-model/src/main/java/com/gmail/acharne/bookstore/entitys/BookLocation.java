@@ -14,6 +14,9 @@ public class BookLocation extends BaseEntity {
     @Column(name = "persence")
     private Boolean persence;
 
+    @Column(name = "count")
+    private Integer count;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "books_id")
     private Book book;

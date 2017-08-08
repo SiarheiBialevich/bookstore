@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.BookLocation;
 
 public class BookLocationDaoImpl extends AbstractDaoImpl<BookLocation> implements BookLocationDao {
 
-    protected BookLocationDaoImpl(Class clazz) {
-        super(clazz);
+    protected BookLocationDaoImpl() {
+        super(BookLocation.class);
     }
 }

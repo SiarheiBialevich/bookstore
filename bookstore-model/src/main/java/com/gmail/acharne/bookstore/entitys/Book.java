@@ -140,14 +140,14 @@ public class Book extends BaseEntity {
         sb.append(title);
         sb.append(", genre = ");
         sb.append(genre);
-        sb.append(", authors = ");
-        sb.append(authors);
-        sb.append(", book_locations = ");
-        sb.append(bookLocations);
-        sb.append(", orders = ");
-        sb.append(orders);
-        sb.append(", diliveries = ");
-        sb.append(diliveries);
+//        sb.append(", authors = ");
+//        sb.append(authors);
+//        sb.append(", book_locations = ");
+//        sb.append(bookLocations);
+//        sb.append(", orders = ");
+//        sb.append(orders);
+//        sb.append(", diliveries = ");
+//        sb.append(diliveries);
         sb.append("]");
 
         return sb.toString();

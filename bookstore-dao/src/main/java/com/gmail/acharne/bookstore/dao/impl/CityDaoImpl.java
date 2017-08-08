@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.City;
 
 public class CityDaoImpl extends AbstractDaoImpl<City> implements CityDao {
 
-    protected CityDaoImpl(Class clazz) {
-        super(clazz);
+    protected CityDaoImpl() {
+        super(City.class);
     }
 }

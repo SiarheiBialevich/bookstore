@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.Genre;
 
 public class GenreDaoImpl extends AbstractDaoImpl<Genre> implements GenreDao {
 
-    protected GenreDaoImpl(Class clazz) {
-        super(clazz);
+    protected GenreDaoImpl() {
+        super(Genre.class);
     }
 }

@@ -10,9 +10,9 @@ import java.util.List;
 
 public abstract class AbstractDaoImpl<T extends BaseEntity> implements AbstractDao<T> {
 
-    private Class clazz;
+    private Class<T> clazz;
 
-    protected AbstractDaoImpl(Class clazz){
+    protected AbstractDaoImpl(Class<T> clazz){
         this.clazz = clazz;
     }
 

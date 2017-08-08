@@ -15,9 +15,6 @@ public class Location extends BaseEntity {
     @Column(name = "title")
     private String titleLocation;
 
-    @Column(name = "count")
-    private Integer count;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "citys_id")
     private City city;
@@ -47,14 +44,6 @@ public class Location extends BaseEntity {
         this.titleLocation = titleLocation;
     }
 
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
     public City getCity() {
         return city;
     }
@@ -81,7 +70,6 @@ public class Location extends BaseEntity {
         if (id != null ? !id.equals(location.id) : location.id != null) return false;
         if (titleLocation != null ? !titleLocation.equals(location.titleLocation) : location.titleLocation != null)
             return false;
-        if (count != null ? !count.equals(location.count) : location.count != null) return false;
         if (city != null ? !city.equals(location.city) : location.city != null) return false;
         if (bookLocations != null ? !bookLocations.equals(location.bookLocations) : location.bookLocations != null)
             return false;
@@ -93,7 +81,6 @@ public class Location extends BaseEntity {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (titleLocation != null ? titleLocation.hashCode() : 0);
-        result = 31 * result + (count != null ? count.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
         result = 31 * result + (bookLocations != null ? bookLocations.hashCode() : 0);
         return result;
@@ -107,8 +94,6 @@ public class Location extends BaseEntity {
         sb.append(id);
         sb.append(", title = ");
         sb.append(titleLocation);
-        sb.append(", count = ");
-        sb.append(count);
         sb.append(", city = ");
         sb.append(city);
         sb.append(", book_locations = ");

@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.Dilivery;
 
 public class DiliveryDaoImpl extends AbstractDaoImpl<Dilivery> implements DiliveryDao {
 
-    protected DiliveryDaoImpl(Class clazz) {
-        super(clazz);
+    protected DiliveryDaoImpl() {
+        super(Dilivery.class);
     }
 }
