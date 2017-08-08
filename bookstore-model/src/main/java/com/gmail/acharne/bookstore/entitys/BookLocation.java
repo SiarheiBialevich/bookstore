@@ -11,9 +11,6 @@ public class BookLocation extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "persence")
-    private Boolean persence;
-
     @Column(name = "count")
     private Integer count;
 
@@ -37,14 +34,6 @@ public class BookLocation extends BaseEntity {
     @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Boolean getPersence() {
-        return persence;
-    }
-
-    public void setPersence(Boolean persence) {
-        this.persence = persence;
     }
 
     public Book getBook() {
@@ -71,7 +60,7 @@ public class BookLocation extends BaseEntity {
         BookLocation that = (BookLocation) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (persence != null ? !persence.equals(that.persence) : that.persence != null) return false;
+        if (count != null ? !count.equals(that.count) : that.count != null) return false;
         if (book != null ? !book.equals(that.book) : that.book != null) return false;
         if (location != null ? !location.equals(that.location) : that.location != null) return false;
 
@@ -81,7 +70,7 @@ public class BookLocation extends BaseEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (persence != null ? persence.hashCode() : 0);
+        result = 31 * result + (count != null ? count.hashCode() : 0);
         result = 31 * result + (book != null ? book.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;
@@ -93,8 +82,6 @@ public class BookLocation extends BaseEntity {
         StringBuilder sb = new StringBuilder();
         sb.append("BookLocation [id = ");
         sb.append(id);
-        sb.append(", persence = ");
-        sb.append(persence);
         sb.append(", book = ");
         sb.append(book);
         sb.append(", location = ");

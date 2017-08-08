@@ -6,7 +6,11 @@ import com.gmail.acharne.bookstore.service.AuthorService;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import java.util.List;
 
@@ -27,9 +31,16 @@ public class AuthorServiceImpl implements AuthorService {
         try {
             session.beginTransaction();
 
-            Criteria criteria = session.createCriteria(Author.class, "author");
-            criteria.createCriteria("Book.authors", "books");
-            criteria.setProjection(Projections.distinct(Projections.property("author")));
+            Criteria criteria = session.createCriteria(Author.class, "a");
+            criteria.createAlias("books", "b", JoinType.LEFT_OUTER_JOIN)
+                    .add(Restrictions.or(
+                            Restrictions.eq("a.id", 1),
+                            Restrictions.and(
+                                    Restrictions.isEmpty("a.books"),
+                                    Restrictions.isEmpty("b.authors")
+
+                            )
+                    ));
 
             authors = criteria.list();
 
@@ -37,6 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
         } catch (Exception e) {
             session.getTransaction().rollback();
             log.info("Error in method call getBooksByAuthor", e);
+            e.getMessage();
 
         } finally {
             session.close();

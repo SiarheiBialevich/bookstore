@@ -19,7 +19,7 @@ public class Author extends BaseEntity {
     private String lastnameAuthor;
 
     @Column(name = "d_birth")
-    private Integer birthday;
+    private String birthday;
 
     @Column(name = "biography")
     private String biography;
@@ -57,11 +57,11 @@ public class Author extends BaseEntity {
         this.lastnameAuthor = lastnameAuthor;
     }
 
-    public Integer getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Integer birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -122,10 +122,10 @@ public class Author extends BaseEntity {
         sb.append(lastnameAuthor);
         sb.append(", birthday = ");
         sb.append(birthday);
-        sb.append(", biography");
+        sb.append(", biography = ");
         sb.append(biography);
-        sb.append(", books = ");
-        sb.append(books);
+//        sb.append(", books = ");
+//        sb.append(books);
         sb.append("]");
 
         return sb.toString();

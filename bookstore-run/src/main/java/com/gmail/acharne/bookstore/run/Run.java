@@ -23,7 +23,8 @@ public class Run {
 
         AuthorService authorService = new AuthorServiceImpl();
         List<Author> authors = authorService.getBooksByAuthor();
-        log.info(authors);
+        //log.info(authors);
+        System.out.println(authors);
 
         HibernateUtil.shutdown();
     }

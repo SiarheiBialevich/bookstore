@@ -139,7 +139,7 @@ public class Book extends BaseEntity {
         sb.append(", title = ");
         sb.append(title);
         sb.append(", genre = ");
-        sb.append(genre);
+//        sb.append(genre);
 //        sb.append(", authors = ");
 //        sb.append(authors);
 //        sb.append(", book_locations = ");
