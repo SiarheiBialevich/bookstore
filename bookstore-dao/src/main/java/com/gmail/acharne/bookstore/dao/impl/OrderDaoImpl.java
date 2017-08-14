@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.Order;
 
 public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDao {
 
-    protected OrderDaoImpl() {
+    public OrderDaoImpl() {
         super(Order.class);
     }
 }

@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.User;
 
 public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
 
-    protected UserDaoImpl() {
+    public UserDaoImpl() {
         super(User.class);
     }
 }

@@ -15,7 +15,7 @@ public class Location extends BaseEntity {
     @Column(name = "title")
     private String titleLocation;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "citys_id")
     private City city;
 

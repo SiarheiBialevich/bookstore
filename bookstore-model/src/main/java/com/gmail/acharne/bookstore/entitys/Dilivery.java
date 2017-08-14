@@ -14,7 +14,7 @@ public class Dilivery extends BaseEntity {
     @Column(name = "shipping_method")
     private String shippingMethod;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "books_id")
     private Book book;
 

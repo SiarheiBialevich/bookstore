@@ -5,7 +5,7 @@ import com.gmail.acharne.bookstore.entitys.Role;
 
 public class RoleDaoImpl extends AbstractDaoImpl<Role> implements RoleDao {
 
-    protected RoleDaoImpl() {
+    public RoleDaoImpl() {
         super(Role.class);
     }
 }

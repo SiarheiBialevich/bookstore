@@ -15,11 +15,11 @@ public class Book extends BaseEntity {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "genres_id")
     private Genre genre;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "books_authors",
         joinColumns = {@JoinColumn(name = "books_id")},
         inverseJoinColumns = {@JoinColumn(name = "authors_id")})
@@ -28,7 +28,7 @@ public class Book extends BaseEntity {
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<BookLocation> bookLocations;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "books_orderings",
             joinColumns = {@JoinColumn(name = "books_id")},
             inverseJoinColumns = {@JoinColumn(name = "orderings_id")})
@@ -140,14 +140,14 @@ public class Book extends BaseEntity {
         sb.append(title);
         sb.append(", genre = ");
         sb.append(genre);
-//        sb.append(", authors = ");
-//        sb.append(authors);
-//        sb.append(", book_locations = ");
-//        sb.append(bookLocations);
-//        sb.append(", orders = ");
-//        sb.append(orders);
-//        sb.append(", diliveries = ");
-//        sb.append(diliveries);
+        sb.append(", authors = ");
+        sb.append(authors);
+        sb.append(", book_locations = ");
+        sb.append(bookLocations);
+        sb.append(", orders = ");
+        sb.append(orders);
+        sb.append(", diliveries = ");
+        sb.append(diliveries);
         sb.append("]");
 
         return sb.toString();

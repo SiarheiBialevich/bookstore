@@ -19,7 +19,7 @@ public class Order extends BaseEntity {
     @ManyToMany(mappedBy = "orders")
     private List<Book> books;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "users_id")
     private User user;
 
