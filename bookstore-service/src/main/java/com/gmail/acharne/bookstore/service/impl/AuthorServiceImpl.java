@@ -1,14 +1,12 @@
 package com.gmail.acharne.bookstore.service.impl;
 
-import com.gmail.acharne.bookstore.dao.AuthorDao;
-import com.gmail.acharne.bookstore.dao.impl.AuthorDaoImpl;
 import com.gmail.acharne.bookstore.dao.impl.util.HibernateUtil;
 import com.gmail.acharne.bookstore.entitys.Author;
 import com.gmail.acharne.bookstore.service.AuthorService;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Projections;
 
 import java.util.List;
 
@@ -16,118 +14,34 @@ public class AuthorServiceImpl implements AuthorService {
 
     private static final Logger log = Logger.getLogger(BookServiceImpl.class.getName());
 
-    private AuthorDao authorDao = new AuthorDaoImpl();
-
-    public void add(Author author) {
-
-        Session session = HibernateUtil.getInstance().getSession();
-
-        try {
-
-            session.beginTransaction();
-
-            authorDao.create(author, session);
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error adding author", e);
-            session.getTransaction().rollback();
-
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
+    //AuthorDao authorDao = new AuthorDaoImpl();
 
     @SuppressWarnings("unchecked")
-    public void getAll() {
+    @Override
+    public List<Author> getBooksByAuthor() {
+
+        Session session = HibernateUtil.getInstance().getSession();
 
         List<Author> authors = null;
 
-        Session session = HibernateUtil.getInstance().getSession();
-
         try {
-
             session.beginTransaction();
 
-            Criteria criteria = session.createCriteria(Author.class);
+            Criteria criteria = session.createCriteria(Author.class, "author");
+            criteria.createCriteria("Book.authors", "books");
+            criteria.setProjection(Projections.distinct(Projections.property("author")));
 
-            //noinspection UnusedAssignment
             authors = criteria.list();
 
             session.getTransaction().commit();
-
         } catch (Exception e) {
-
-            log.error("Error get all authors", e);
             session.getTransaction().rollback();
+            log.info("Error in method call getBooksByAuthor", e);
 
         } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    public Author getById(Integer id) {
-
-        Session session = HibernateUtil.getInstance().getSession();
-
-        Criteria criteria = null;
-
-        try {
-
-            session.beginTransaction();
-
-            criteria = session.createCriteria(Author.class);
-            criteria.add(Restrictions.eq("id", id));
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error get author by last name", e);
-            session.getTransaction().rollback();
-
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
+            session.close();
         }
 
-        return (Author) criteria.list().get(0);
+        return authors;
     }
-
-    public void delete(Author author) {
-
-        Session session = HibernateUtil.getInstance().getSession();
-
-        try {
-
-            session.beginTransaction();
-
-            authorDao.delete(author, session);
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error delete author", e);
-            session.getTransaction().rollback();
-
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
-    }
-
 }
