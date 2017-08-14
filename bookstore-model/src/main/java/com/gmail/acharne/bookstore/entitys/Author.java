@@ -124,8 +124,8 @@ public class Author extends BaseEntity {
         sb.append(birthday);
         sb.append(", biography = ");
         sb.append(biography);
-//        sb.append(", books = ");
-//        sb.append(books);
+        sb.append(", books = ");
+        sb.append(books);
         sb.append("]");
 
         return sb.toString();
