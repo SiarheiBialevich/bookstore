@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -13,54 +14,49 @@ public class HibernateUtil {
 
     private final static Logger log = Logger.getLogger(HibernateUtil.class.getName());
 
-    private static HibernateUtil instance;
-    private Configuration cfg;
+    private static HibernateUtil hibernateUtil;
     private static SessionFactory factory;
-    private static ServiceRegistry serviceRegistry;
 
-    private HibernateUtil() throws HibernateException {
+    private HibernateUtil() {
+
+    }
+
+    public static synchronized HibernateUtil getInstance() {
+        if (hibernateUtil == null) {
+            hibernateUtil = new HibernateUtil();
+        }
+
+        return hibernateUtil;
+    }
+
+    public Session getSession() {
+
+        if (factory == null) {
+            createFactory();
+        }
+
+        return factory.openSession();
+    }
+
+    private void createFactory() {
         try {
 
-            cfg = new Configuration().configure("hibernate.cfg.xml");
+            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
             log.info("Hibernate Configuration loaded");
 
-            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
             log.info("Hibernate serviceRegistry created");
 
             factory = cfg.buildSessionFactory(serviceRegistry);
-        }
-        catch (Throwable ex) {
+        } catch (Throwable ex) {
             log.error("Initial SessionFactory creation failed." + ex.getMessage());
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    public static synchronized HibernateUtil getInstance() throws HibernateException {
-        if (instance == null) {
-            instance = new HibernateUtil();
-        }
-
-        return instance;
-    }
-
-    public Session getSession() throws HibernateException {
-
-        Session session = factory.openSession();
-
-        if (!session.isConnected()) {
-            this.reconnect();
-        }
-
-        return session;
-    }
-
-    private void reconnect() throws HibernateException {
-        this.factory = cfg.buildSessionFactory(serviceRegistry);
-    }
-
     public static void shutdown() {
-        if (serviceRegistry != null) {
-            StandardServiceRegistryBuilder.destroy(serviceRegistry);
+        if (factory != null) {
+            factory.close();
         }
     }
 }
