@@ -37,4 +37,53 @@ public class OrderServiceImpl implements OrderService {
             }
         }
     }
+
+    public void update(Order order) {
+
+        Session session = HibernateUtil.getInstance().getSession();
+
+        try {
+
+            session.beginTransaction();
+
+            orderDao.update(order, session);
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+
+            log.error("Error update order", e);
+            session.getTransaction().rollback();
+
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public void delete(Order order) {
+
+        Session session = HibernateUtil.getInstance().getSession();
+
+        try {
+
+            session.beginTransaction();
+
+            orderDao.delete(order, session);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+
+            log.error("Error delete order", e);
+            session.getTransaction().rollback();
+
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }
