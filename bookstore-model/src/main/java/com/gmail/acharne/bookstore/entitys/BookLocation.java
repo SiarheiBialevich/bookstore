@@ -1,6 +1,14 @@
 package com.gmail.acharne.bookstore.entitys;
 
+import lombok.*;
+
 import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"book", "location"})
+@EqualsAndHashCode(callSuper = true, exclude = {"book", "location"})
 
 @SuppressWarnings("ALL")
 @Entity
@@ -14,17 +22,13 @@ public class BookLocation extends BaseEntity {
     @Column(name = "count")
     private Integer count;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "books_id")
     private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "locations_id")
     private Location location;
-
-    public BookLocation() {
-
-    }
 
     @Override
     public Integer getId() {
@@ -36,58 +40,4 @@ public class BookLocation extends BaseEntity {
         this.id = id;
     }
 
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BookLocation that = (BookLocation) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (count != null ? !count.equals(that.count) : that.count != null) return false;
-        if (book != null ? !book.equals(that.book) : that.book != null) return false;
-        if (location != null ? !location.equals(that.location) : that.location != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (count != null ? count.hashCode() : 0);
-        result = 31 * result + (book != null ? book.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("BookLocation [id = ");
-        sb.append(id);
-        sb.append(", book = ");
-        sb.append(book);
-        sb.append(", location = ");
-        sb.append(location);
-        sb.append("]");
-
-        return sb.toString();
-    }
 }

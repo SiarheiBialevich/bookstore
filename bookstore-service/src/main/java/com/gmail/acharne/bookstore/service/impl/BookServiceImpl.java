@@ -126,4 +126,34 @@ public class BookServiceImpl implements BookService {
             }
         }
     }
+
+    @Override
+    public List<Book> getBooksByGenre(String nameGenre) {
+
+        Session session = HibernateUtil.getInstance().getSession();
+
+        List<Book> books = null;
+
+        try {
+
+            session.beginTransaction();
+
+            books = bookDao.getBooksByGenre(nameGenre, session);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            log.error("Error get book by genre", e);
+            session.getTransaction().rollback();
+
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+
+        }
+
+        return null;
+    }
 }

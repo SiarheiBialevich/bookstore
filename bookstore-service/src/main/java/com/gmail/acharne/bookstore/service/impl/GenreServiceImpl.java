@@ -8,6 +8,8 @@ import com.gmail.acharne.bookstore.service.GenreService;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
+import java.util.List;
+
 public class GenreServiceImpl implements GenreService {
 
     private static final Logger log = Logger.getLogger(GenreServiceImpl.class.getName());
@@ -37,5 +39,36 @@ public class GenreServiceImpl implements GenreService {
                 session.close();
             }
         }
+    }
+
+    @Override
+    public List<Genre> getAllGenresWithBooks(String name) {
+
+        Session session = HibernateUtil.getInstance().getSession();
+
+        List<Genre> genres = null;
+
+        try {
+
+            session.beginTransaction();
+
+            genres = genreDao.getAllGenresWithBooks(name, session);
+
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+
+            session.getTransaction().rollback();
+            log.error("Error in service get all genres with books", e);
+
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+
+        }
+
+        return genres;
     }
 }
