@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Вход в систему</title>
 
-	<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="resources/css/login.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="resources/bootstrap/bootstrap-grid-3.3.1.min.css" />
 	<script type = "text/javascript" src = "http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 </head>
