@@ -8,11 +8,12 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
+
 public abstract class AbstractDaoImpl<T extends BaseEntity> implements AbstractDao<T> {
 
     private Class<T> clazz;
 
-    protected AbstractDaoImpl(Class<T> clazz){
+    protected AbstractDaoImpl(Class<T> clazz) {
         this.clazz = clazz;
     }
 
@@ -28,7 +29,7 @@ public abstract class AbstractDaoImpl<T extends BaseEntity> implements AbstractD
         Criteria criteria = session.createCriteria(clazz);
         criteria.add(Restrictions.eq("id", id));
 
-        return (T)criteria.list().get(0);
+        return (T) criteria.list().get(0);
     }
 
     @SuppressWarnings("unchecked")

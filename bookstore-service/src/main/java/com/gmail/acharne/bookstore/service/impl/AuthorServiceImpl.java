@@ -2,127 +2,68 @@ package com.gmail.acharne.bookstore.service.impl;
 
 import com.gmail.acharne.bookstore.dao.AuthorDao;
 import com.gmail.acharne.bookstore.dao.impl.AuthorDaoImpl;
-import com.gmail.acharne.bookstore.dao.impl.util.HibernateUtil;
 import com.gmail.acharne.bookstore.entitys.Author;
 import com.gmail.acharne.bookstore.service.AuthorService;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SuppressWarnings("ALL")
+@Service
 public class AuthorServiceImpl implements AuthorService {
 
     private static final Logger log = Logger.getLogger(BookServiceImpl.class.getName());
 
     private AuthorDao authorDao = new AuthorDaoImpl();
 
+    private SessionFactory sessionFactory;
+
+    private Session session;
+
+    @Transactional
     public void add(Author author) {
 
-        Session session = HibernateUtil.getInstance().getSession();
+        session = this.sessionFactory.getCurrentSession();
 
-        try {
-
-            session.beginTransaction();
-
-            authorDao.create(author, session);
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error adding author", e);
-            session.getTransaction().rollback();
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
+        authorDao.create(author, session);
     }
 
+    @Transactional
     public void getAll() {
 
         List<Author> authors = null;
-        Session session = HibernateUtil.getInstance().getSession();
+        session = this.sessionFactory.getCurrentSession();
 
-        try {
+        Criteria criteria = session.createCriteria(Author.class);
 
-            session.beginTransaction();
-
-            Criteria criteria = session.createCriteria(Author.class);
-
-            authors = criteria.list();
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error get all authors", e);
-            session.getTransaction().rollback();
-
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
+        authors = criteria.list();
     }
 
+    @Transactional
     public Author getById(Integer id) {
 
-        Session session = HibernateUtil.getInstance().getSession();
+        session = this.sessionFactory.getCurrentSession();
 
         Criteria criteria = null;
 
-        try {
-
-            session.beginTransaction();
-
-            criteria = session.createCriteria(Author.class);
-            criteria.add(Restrictions.eq("id", id));
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error get author by id", e);
-            session.getTransaction().rollback();
-
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
+        criteria = session.createCriteria(Author.class);
+        criteria.add(Restrictions.eq("id", id));
 
         return (Author) criteria.list().get(0);
     }
 
+    @Transactional
     public void delete(Author book) {
 
-        Session session = HibernateUtil.getInstance().getSession();
+        session = this.sessionFactory.getCurrentSession();
 
-        try {
+        authorDao.delete(book, session);
 
-            session.beginTransaction();
-
-            authorDao.delete(book, session);
-
-            session.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            log.error("Error delete author", e);
-            session.getTransaction().rollback();
-
-        } finally {
-
-            if (session != null) {
-                session.close();
-            }
-        }
     }
 }

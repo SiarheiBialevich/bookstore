@@ -1,11 +1,8 @@
 package com.gmail.acharne.bookstore.run;
 
 import com.gmail.acharne.bookstore.dao.impl.util.HibernateUtil;
-import com.gmail.acharne.bookstore.entitys.Book;
 import com.gmail.acharne.bookstore.entitys.Genre;
-import com.gmail.acharne.bookstore.service.BookService;
 import com.gmail.acharne.bookstore.service.GenreService;
-import com.gmail.acharne.bookstore.service.impl.BookServiceImpl;
 import com.gmail.acharne.bookstore.service.impl.GenreServiceImpl;
 import org.apache.log4j.Logger;
 
@@ -22,8 +19,8 @@ public class Run {
 
         List<Genre> genres = genreService.getAllGenresWithBooks("horror");
         for (Genre genre : genres) {
-            System.out.println(genre);
-            System.out.println(genre.getBooks());
+            System.out.println(genre + " " + genre.getBooks());
+
         }
 
 

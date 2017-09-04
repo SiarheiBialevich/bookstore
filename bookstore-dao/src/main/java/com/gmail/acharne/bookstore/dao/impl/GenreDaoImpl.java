@@ -7,9 +7,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class GenreDaoImpl extends AbstractDaoImpl<Genre> implements GenreDao {
 
     private static final Logger log = Logger.getLogger(GenreDaoImpl.class.getName());

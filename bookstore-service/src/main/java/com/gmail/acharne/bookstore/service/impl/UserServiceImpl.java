@@ -3,11 +3,12 @@ package com.gmail.acharne.bookstore.service.impl;
 import com.gmail.acharne.bookstore.dao.UserDao;
 import com.gmail.acharne.bookstore.dao.impl.UserDaoImpl;
 import com.gmail.acharne.bookstore.dao.impl.util.HibernateUtil;
-import com.gmail.acharne.bookstore.service.UserService;
 import com.gmail.acharne.bookstore.entitys.User;
+import com.gmail.acharne.bookstore.service.UserService;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
+@SuppressWarnings("ALL")
 public class UserServiceImpl implements UserService {
 
     private static final Logger log = Logger.getLogger(UserServiceImpl.class.getName());

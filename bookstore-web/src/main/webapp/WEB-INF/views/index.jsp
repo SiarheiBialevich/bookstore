@@ -5,6 +5,7 @@
 <html>
 <body>
     <h2>Say Hello!</h2>
+<%--suppress HtmlUnknownTarget --%>
     <a href="mypage">click</a>
 </body>
 </html>
